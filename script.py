@@ -6,6 +6,13 @@ import numpy as np
 
 
 def produce_plot(result, fig_name, kind):
+    """Save plot of result
+
+    Parameters:
+    result: data to draw
+    fig_name: figure name
+    kind: type of data used to plot
+   """
     plt.bar(["\"{}\"".format(i[0]) for i in result], [i[1] for i in result])
     plt.ylabel('total')
     plt.xlabel('term')
@@ -17,6 +24,14 @@ def produce_plot(result, fig_name, kind):
 
 
 def top_pos(doc, pos, n, fig_name=""):
+    """Finds the top n spaCy pos
+
+    Parameters:
+    doc: spaCy's doc
+    pos: pos we are interesting in finding; one of "VERB", "NOUN", "ADJ" or "ADV"
+    n: how many pos
+    fig_name: name of the plot
+   """
     pos_count = {}
     for token in doc:
         # ignore stop words
@@ -40,6 +55,13 @@ def top_pos(doc, pos, n, fig_name=""):
 
 
 def top_entities(doc, n, fig_name=""):
+    """Finds the top n spaCy entities
+
+    Parameters:
+    doc: spaCy's doc
+    n: how many entities
+    fig_name: name of the plot
+   """
     entities = {}
     # named entities
     for ent in doc.ents:
@@ -71,6 +93,15 @@ def overall_results(doc):
 
 
 def character_results(nlp):
+    """Creates a doc per character using their lines,
+    and calculate the top 10 pos and entities
+
+    Parameters:
+    nlp: spaCy's nlp
+
+    Returns:
+    character:doc dict
+   """
     # these are the characters I want to analyze
     subjects = ['thor', 'tony stark', 'bruce banner', 'doctor strange',
                 'steve rogers', 'thanos', 'wanda maximoff', 'vision',
@@ -87,10 +118,9 @@ def character_results(nlp):
             for line in file:
                 if line.lower().startswith(subject):
                     # remove the subject, e.g. Thanos :.... before appending
-                    # check this mess you have here
                     lines_with_subject.append(re.sub(r'.*:', '', line.lower()))
         # create a doc using a long string with line break between line
-        #  made of all the lines spoken by the subject
+        # made from all the lines spoken by the subject
         doc = nlp('\n'.join(lines_with_subject))
         top_pos(doc, 'VERB', 10, subject)
         top_pos(doc, 'NOUN', 10, subject)
@@ -103,6 +133,7 @@ def character_results(nlp):
 
 
 def docs_similarities(subjects_docs):
+    # remove Groot from dict 
     del subjects_docs['groot']
     # create a square ndarray of len(subjects_docs) filled with 1's
     similarities_matrix = np.full((len(subjects_docs), len(subjects_docs)), fill_value=1.0)
