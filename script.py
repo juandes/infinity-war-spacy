@@ -12,7 +12,8 @@ def produce_plot(result, fig_name, kind):
     result: data to draw
     fig_name: figure name
     kind: type of data used to plot
-   """
+    """
+    
     plt.bar(["\"{}\"".format(i[0]) for i in result], [i[1] for i in result])
     plt.ylabel('total')
     plt.xlabel('term')
@@ -31,7 +32,8 @@ def top_pos(doc, pos, n, fig_name=""):
     pos: pos we are interesting in finding; one of "VERB", "NOUN", "ADJ" or "ADV"
     n: how many pos
     fig_name: name of the plot
-   """
+    """
+    
     pos_count = {}
     for token in doc:
         # ignore stop words
@@ -61,7 +63,8 @@ def top_entities(doc, n, fig_name=""):
     doc: spaCy's doc
     n: how many entities
     fig_name: name of the plot
-   """
+    """
+    
     entities = {}
     # named entities
     for ent in doc.ents:
