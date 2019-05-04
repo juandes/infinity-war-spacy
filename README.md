@@ -16,3 +16,5 @@ Using [spaCy](https://spacy.io/), an NLP Python open source library designed to 
 ## Repo content
 Besides the scripts, the repo contains the full movie script (raw_script.txt), the script without comments, scenes descriptions, and the subjects (cleaned-script.txt), and the cleaned script but with the subjects (cleaned-script-subject.txt). Moreover, the plots directory contains all the plots that show the top nouns, adverbs, adjetives, verbs and entities per character.
 
+Thanks to Manuel Romero (https://github.com/mrm8488) for writing the Jupyter notebook.
+
